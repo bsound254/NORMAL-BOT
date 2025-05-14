@@ -1,0 +1,31 @@
+ okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class GitHubBot {
+    public static void main(String[] args) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+
+        // Handle new issue event
+        Request request = new Request.Builder()
+                .url("https://api.github.com/repos/{owner}/{repo}/issues")
+                .header("Authorization", "Bearer YOUR_GITHUB_TOKEN")
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        // Parse issue data and respond accordingly
+        String issueTitle = // parse issue title from response
+        String issueBody = // parse issue body from response
+
+        // Respond to issue
+        Request respondRequest = new Request.Builder()
+                .url("https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/comments")
+                .header("Authorization", "Bearer YOUR_GITHUB_TOKEN")
+                .post(okhttp3.RequestBody.create(okhttp3.MediaType.get("application/json"), "{\"body\":\"Thank you for submitting an issue! We'll review it soon.\"}"))
+                .build();
+
+        Response respondResponse = client.newCall(respondRequest).execute();
+    }
+}
+```
