@@ -1,0 +1,21 @@
+
+jobs:
+  automate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label issue
+        uses: actions/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            bug
+            feature request
+            documentation
+
+      - name: Assign team member
+        uses: actions/assign-author@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: |
+            @developer
+            @product-manager
